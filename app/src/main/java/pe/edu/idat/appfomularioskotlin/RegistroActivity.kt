@@ -106,13 +106,20 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener, AdapterView.
             var infoPersona = binding.etnombre.text.toString()+" "+
                     binding.etapellido.text.toString()+" "+
                     obtenerGenero() + " " +
-                    listaPreferencias.toArray()+" " +
+                    obtenerPreferencias()+" " +
                     estadocivil+" "+
                     binding.swnotificacion.isChecked
             listaPersonas.add(infoPersona)
             AppMensaje.enviarMensaje(binding.root, getString(R.string.mensajeregistro), TipoMensaje.CORRECTO)
         }
+    }
 
+    fun obtenerPreferencias(): String{
+        var preferencias = ""
+        for (pref in listaPreferencias){
+            preferencias += "$pref-"
+        }
+        return preferencias
     }
     fun obtenerGenero():String{
         return if(binding.rggenero.checkedRadioButtonId == R.id.rbmasculino)
